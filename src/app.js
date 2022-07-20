@@ -60,7 +60,7 @@ app.get('/weather', (req, res) => {
             }) //The program will terminate here since we return and wont execute downward
         }
         //console.log(`Weather Forecast for ${location}`)
-        forecast(longitude,latitude, (error, {desc, currentTemp, feelsLike} = {}) =>{ //Destructure data coming from forecast
+        forecast(longitude,latitude, (error, {desc, currentTemp, feelsLike, humidity, time} = {}) =>{ //Destructure data coming from forecast
             if(error){
                 return res.send({
                     'Error': error
@@ -71,7 +71,9 @@ app.get('/weather', (req, res) => {
                 'Description': desc,
                 'Current Temp': currentTemp,
                 'Feels Like': feelsLike,
-                'forecast': `${desc}. It is currently ${currentTemp} degree out. it feels like ${feelsLike} degree out`
+                'humidity': humidity,
+                'time': time,
+                'forecast': `As at ${time}, ${desc} but temperature is currently ${currentTemp} degree out, it feels like ${feelsLike} degree out there with ${humidity}% humidity`
             })
             //console.log(`${desc}. It is currently ${currentTemp} degree out. it feels like ${feelsLike} degree out`)
         })
